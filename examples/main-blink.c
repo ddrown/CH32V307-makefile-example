@@ -13,8 +13,8 @@
 /*
  *@Note
  GPIO routine:
- PA0 push-pull output.
-
+ PA0&PA1 push-pull output.
+ Setup: use jumpers to connect the LED1/LED2 pins to PA0/PA1
 */
 
 #include "debug.h"
