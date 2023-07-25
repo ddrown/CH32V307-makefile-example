@@ -2,6 +2,7 @@
 
 Requirements:
  - xpack riscv toolchain (riscv-none-embed-)
+ - minichlink in path (https://github.com/cnlohr/ch32v003fun/tree/master/minichlink)
 
 Set up udev rules for WCH link
 ```
@@ -14,6 +15,10 @@ Make project
 make
 ```
 
+Flash to micro (will compile if needed)
+```
+make flash
+```
 
 # Licence
 
