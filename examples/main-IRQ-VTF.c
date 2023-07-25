@@ -23,18 +23,23 @@
 /* Global Variable */ 
 uint32_t time=0;
 
-// 11 cycles = VTF + hardware stack interrupt
-// 14 cycles = hardware stack interrupt
+// 11 cycles = VTF + hardware stack interrupt (bugs!)
+// 14 cycles = hardware stack interrupt (bugs!)
+// 14 cycles = VTF + hardware stack interrupt workaround
+// 16 cycles = hardware stack interrupt workaround
 // 46 cycles = VTF + software stack interrupt
 // 48 cycles = software stack interrupt
-#define USE_HARDWARE_STACK_INTERRUPT 1
+#define USE_HARDWARE_STACK_INTERRUPT 0
 #define USE_VTF_INTERRUPT 1
 
 #if USE_HARDWARE_STACK_INTERRUPT == 1
 void SysTick_Handler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
+#elif USE_HARDWARE_STACK_INTERRUPT == 2
+void SysTick_Handler(void) __attribute__((naked));
 #else
 void SysTick_Handler(void) __attribute__((interrupt()));
 #endif
+
 
 /*********************************************************************
  * @fn      Interrupt_VTF_Init
@@ -88,6 +93,12 @@ int main(void)
    }
 }
 
+#if USE_HARDWARE_STACK_INTERRUPT == 2
+void SysTick_Handler() {
+  __asm volatile ("call SysTick_Handler_real; mret");
+}
+#endif
+
 /*********************************************************************
  * @fn      SysTick_Handler
  *
@@ -95,7 +106,11 @@ int main(void)
  *
  * @return  none
  */
+#if USE_HARDWARE_STACK_INTERRUPT == 2
+__attribute__ ((used)) void SysTick_Handler_real(void)
+#else
 void SysTick_Handler(void)
+#endif
 {
     time=SysTick->CNT;
     SysTick->CTLR=0;
