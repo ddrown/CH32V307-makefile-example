@@ -1,0 +1,1 @@
+USB Full Speed port is the left USB C labeled "P7"

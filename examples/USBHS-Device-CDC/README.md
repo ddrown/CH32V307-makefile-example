@@ -1,0 +1,1 @@
+USB High Speed port is the right USB C labeled "P6"
