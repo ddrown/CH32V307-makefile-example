@@ -48,7 +48,7 @@ u8 RTC_Alarm_Set(u16 syear, u8 smon, u8 sday, u8 hour, u8 min, u8 sec);
 u8 RTC_Get(void);
 u8 RTC_Get_Week(u16 year, u8 month, u8 day);
 u8 RTC_Set(u16 syear, u8 smon, u8 sday, u8 hour, u8 min, u8 sec);
-void RTC_IRQHandler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
+void RTC_IRQHandler(void) __attribute__((interrupt));
 
 void RTC_IRQHandler(void)
 {
@@ -354,10 +354,7 @@ int main(void)
     while(1)
     {
         Delay_Ms(1000);
-        // TODO: rtc interrupt function isn't called
-        printf("%d-%d-%d  %d  %d:%d:%d\r\n", calendar.w_year, calendar.w_month, calendar.w_date,
+        printf("%d-%d-%d  %d  %02d:%02d:%02d\r\n", calendar.w_year, calendar.w_month, calendar.w_date,
                calendar.week, calendar.hour, calendar.min, calendar.sec);
-        printf("c=%u h=%x l=%x\n", RTC_GetCounter(), RTC->CTLRH, RTC->CTLRL);
-        printf("d=%04x%04x\n", RTC->DIVH, RTC->DIVL);
     }
 }
