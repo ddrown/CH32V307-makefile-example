@@ -20,6 +20,18 @@ Flash to micro (will compile if needed)
 make flash
 ```
 
+# Using this in another project
+
+Check this repo out as a submodule, in the directory `CH32V307-makefile-example`. Put your code under `./src`.
+
+Create a `Makefile`:
+```
+VENDOR_DIR := ./CH32V307-makefile-example/vendor
+include ./CH32V307-makefile-example/Makefile
+```
+
+For example https://github.com/ddrown/usbhs-cdc
+
 # Licence
 
 Unless otherwise stated files are licensed as BSD 2-Clause
