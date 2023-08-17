@@ -19,8 +19,8 @@ SRCS := $(shell find $(ALL_SRC_DIRS) -name *.cpp -or -name *.c -or -name *.S)
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
-INC_DIRS := $(shell find $(ALL_SRC_DIRS) -type d)
-INC_FLAGS := $(addprefix -I,$(INC_DIRS))
+INC_DIRS := $(shell find $(ALL_SRC_DIRS) -type f -name \*.h | sed 's!/[^/]*$$!!' | sort -u)
+INC_FLAGS := $(addprefix -I,$(INC_DIRS)) $(EXTRA_INC)
 
 FLAGS ?= -march=rv32imafc -mabi=ilp32f -msmall-data-limit=8 -mno-save-restore -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wunused -Wuninitialized  -g
 DEFINES ?= -DSYSCLK_FREQ_144MHz
