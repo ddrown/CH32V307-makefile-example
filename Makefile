@@ -39,6 +39,9 @@ $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf
 flash: $(BUILD_DIR)/$(TARGET_BIN)
 	$(FLASH_PROG) -a -w $< 0x08000000 -b
 
+usbflash: $(BUILD_DIR)/$(TARGET_EXEC)
+	wchisp flash $<
+
 # assembly
 $(BUILD_DIR)/%.S.o: %.S
 	$(MKDIR_P) $(dir $@)
