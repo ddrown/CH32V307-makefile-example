@@ -2,13 +2,9 @@
 
 Requirements:
  - xpack riscv toolchain (riscv-none-embed-)
- - minichlink in path (https://github.com/cnlohr/ch32v003fun/tree/master/minichlink)
+ - minichlink-307 in path (https://github.com/ddrown/minichlink-307)
 
-Set up udev rules for WCH link
-```
-sudo cp ./50-wch.rules   /etc/udev/rules.d  
-sudo udevadm control --reload-rules
-```
+Set up udev rules for WCH link (see minichlink-307)
 
 Make project
 ```

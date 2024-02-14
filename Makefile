@@ -13,7 +13,7 @@ SRC_DIRS ?= ./src
 VENDOR_DIR ?= ./vendor
 ALL_SRC_DIRS := $(SRC_DIRS) $(VENDOR_DIR)/Core $(VENDOR_DIR)/Debug $(VENDOR_DIR)/Peripheral $(VENDOR_DIR)/Startup $(VENDOR_DIR)/User
 
-FLASH_PROG ?= minichlink
+FLASH_PROG ?= minichlink-307
 
 SRCS := $(shell find $(ALL_SRC_DIRS) -name *.cpp -or -name *.c -or -name *.S)
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
@@ -37,7 +37,7 @@ $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf
 	$(BIN) $< $@
 
 flash: $(BUILD_DIR)/$(TARGET_BIN)
-	$(FLASH_PROG) -a -w $< 0x08000000 -b
+	$(FLASH_PROG) -a -K 64 -w $< 0x08000000 -b
 
 usbflash: $(BUILD_DIR)/$(TARGET_EXEC)
 	wchisp flash $<
