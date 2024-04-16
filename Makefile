@@ -39,6 +39,9 @@ $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf
 flash: $(BUILD_DIR)/$(TARGET_BIN)
 	$(FLASH_PROG) -a -K 64 -w $< 0x08000000 -b
 
+reset:
+	$(FLASH_PROG) -a -b
+
 usbflash: $(BUILD_DIR)/$(TARGET_EXEC)
 	wchisp flash $<
 
