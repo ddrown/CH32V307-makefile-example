@@ -25,7 +25,9 @@ INC_FLAGS := $(addprefix -I,$(INC_DIRS)) $(EXTRA_INC)
 FLAGS ?= -march=rv32imafc -mabi=ilp32f -msmall-data-limit=8 -mno-save-restore -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wunused -Wuninitialized  -g
 DEFINES ?= -DSYSCLK_FREQ_144MHz
 ASFLAGS ?= $(FLAGS) -x assembler $(INC_FLAGS) $(DEFINES) -MMD -MP
-CPPFLAGS ?=  $(FLAGS) $(INC_FLAGS) $(DEFINES) -std=gnu99 -MMD -MP
+CPPFLAGS ?=  $(FLAGS) $(INC_FLAGS) $(DEFINES) -MMD -MP
+CFLAGS ?= -std=gnu99
+CXXFLAGS ?= -std=gnu++17
 LDFLAGS ?= $(FLAGS) -T $(VENDOR_DIR)/Ld/Link.ld -nostartfiles -Xlinker --gc-sections -Wl,-Map,"$(BUILD_DIR)/CH32V307VCT6.map" --specs=nano.specs --specs=nosys.specs
 
 
